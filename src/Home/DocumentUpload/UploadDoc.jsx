@@ -60,7 +60,7 @@ else{
         formData.append('customerId',upload.userId);
         
         try{
-           const response=await axios.post('http://localhost:9291/documents/upload', formData, {
+           const response=await axios.post('http://localhost:9291/documents/uploaddoc', formData, {
                 headers: {
                   'Content-Type': 'multipart/form-data',
                 },
@@ -74,8 +74,11 @@ else{
 
         }
         catch(error){
-            console.log(error);
-            toast.error('Error Encountered');
+            if(error.status==415){
+               
+                toast.error('only jpg jpeg and png type are required')
+            }
+        
             resetForm();
         }
 
@@ -111,7 +114,8 @@ value={upload.DocumentName}
 <div className="form-group">
 <label htmlFor="uploadFile" className="form-label">Upload File</label>
 <input className="form-control"  type="file" id="uploadFile" name="mfile"
-accept=".jpg,.png,.jpeg"
+required
+
 onChange={formChange}
 ref={fileRef}
 
