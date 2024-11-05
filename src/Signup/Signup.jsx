@@ -30,13 +30,9 @@ const handleForm= async(event)=>{
     event.preventDefault();
   
     try{
-        const response= await axios.post('http://localhost:9291/customer/create',formData);
+        const response= await axios.post('http://localhost:9291/customer/createcustomer',formData);
         toast.success(response.data.message+"/n Now Go and Login with your email and password");
-        
-        setTimeout(() => {
-            navigate('/');
-        }, 2000);
-        
+       
     }
 catch(error){
     resetForm();
